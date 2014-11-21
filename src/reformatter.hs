@@ -13,7 +13,7 @@ main = do
         [input, output, number] ->
             case readMaybe number of
                 Just n  -> reformat input output (abs n)
-                Nothing -> putStrLn $ number ++ " is not a number!"
+                Nothing -> putStrLn $ "Error: '" ++ number ++ "' is not a number!"
         _ -> putStrLn $ "Usage: " ++ progName ++ " inputFile outputFile [maxProblems]"
 
 reformat :: String -> String -> Int -> IO ()
