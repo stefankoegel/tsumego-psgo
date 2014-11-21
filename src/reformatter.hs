@@ -2,10 +2,26 @@ module Main where
 
 import System.Environment
 import Text.Parsec
-import Control.Applicative ((<*))
 import Control.Arrow (second)
+import Text.Read (readMaybe)
 
-main = putStrLn "Hello world!"
+main = do
+    progName <- getProgName
+    args <- getArgs
+    case args of
+        [input, output]         -> reformat input output (maxBound :: Int)
+        [input, output, number] ->
+            case readMaybe number of
+                Just n  -> reformat input output (abs n)
+                Nothing -> putStrLn $ number ++ " is not a number!"
+        _ -> putStrLn $ "Usage: " ++ progName ++ " inputFile outputFile [maxProblems]"
+
+reformat :: String -> String -> Int -> IO ()
+reformat input output number = do
+    content <- readFile input
+    case parse simpleBoards input content of
+        Right boards -> writeFile output $ concatMap simpleToPSGO $ take number boards
+        Left pError  -> print pError
 
 data Intersection = Black | White | Free
     deriving (Eq, Show)
@@ -53,7 +69,7 @@ intersection = do
     return inter
 
 intersections :: Parsec String u [[Intersection]]
-intersections = many (many intersection <* newline)
+intersections = many (manyTill intersection newline)
 
 beforeBoard :: Parsec String u ()
 beforeBoard = do
