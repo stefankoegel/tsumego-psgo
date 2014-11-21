@@ -3,16 +3,42 @@ module Main where
 import System.Environment
 import Text.Parsec
 import Control.Applicative ((<*))
+import Control.Arrow (second)
 
 main = putStrLn "Hello world!"
 
 data Intersection = Black | White | Free
-    deriving Show
+    deriving (Eq, Show)
 
 type SimpleBoard = (String, [[Intersection]])
 
 type Position = (Intersection, (Char, Int))
-type PositionBoard = [(String, [Position])]
+type PositionalBoard = (String, [Position])
+
+-- *** Formatter ***
+
+addCoordinates :: [[Intersection]] -> [Position]
+addCoordinates inters = removeFrees $ concat zipped
+    where coordinates = [[(c, r) | c <- ['a'..'h'] ++ ['j'..'t']] | r <- [19, 18 .. 1]]
+          zipped      = zipWith zip inters coordinates
+          removeFrees = filter ((/= Free) . fst)
+
+simpleToPositional :: SimpleBoard -> PositionalBoard
+simpleToPositional = second addCoordinates
+
+positionalToPSGO :: PositionalBoard -> String
+positionalToPSGO (name, positions) = header ++ concatMap format positions ++ footer
+    where header = "\\goproblem{" ++ name ++ "}{%\n" ++
+                   "\t\\begin{psgopartialboard*}{(1," ++ show size ++ ")(19,19)}\n"
+          size   = subtract 1 $ minimum $ map (snd . snd) positions
+          footer = "\t\\end{psgopartialboard*}\n" ++
+                   "}\n\n"
+          format (Black ,(c, r)) = "\t\\stone{black}{" ++ [c] ++ "}{" ++ show r ++ "}\n"
+          format (White ,(c, r)) = "\t\\stone{white}{" ++ [c] ++ "}{" ++ show r ++ "}\n"
+          format _               = ""
+
+simpleToPSGO :: SimpleBoard -> String
+simpleToPSGO = positionalToPSGO . simpleToPositional
 
 -- *** Parser ***
 
