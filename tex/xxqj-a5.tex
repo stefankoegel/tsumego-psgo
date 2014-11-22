@@ -1,0 +1,83 @@
+\documentclass[11pt]{book}
+
+\usepackage[a5paper,margin=1.5cm]{geometry}
+\usepackage{float}
+\usepackage{caption}
+
+\usepackage{multicol}
+\setlength{\columnsep}{0.5cm}
+
+\usepackage{psgo}
+\setlength{\goxunit}{0.29cm}
+\setlength{\goyunit}{0.29cm}
+
+\pagestyle{plain}
+
+% Format go problems
+\newcommand{\goproblem}[2]{%
+    \begin{figure}[H]
+        \caption*{\it #1}
+        \vspace{-1em}
+        \centering
+        #2
+        \vspace{-1em}
+    \end{figure}
+}
+
+\begin{document}
+
+\begin{titlepage}
+
+    \vspace*{0.2\textheight}
+
+    \begin{center}
+        \textit{\large [Missing gengen.pdf]}
+    \end{center}
+    \begin{center}
+        \textbf{\huge xuanxuan qijing}
+    \end{center}
+    \begin{center}
+        {\large (gengen gokyo)}
+    \end{center}
+
+\end{titlepage}
+
+\newpage % ---------------------------------------------------------------------
+
+\pagenumbering{gobble}
+
+\noindent\textbf{\Large motto:}
+
+\medskip
+\textit{\normalsize ``It is a matter of life and death, a road either to safety or to ruin. Hence it is a subject of inquiry which can on no account be neglected.''}
+
+\medskip
+\hfill {\it Sun Tzu: The Art of War}
+\bigskip
+
+\noindent\textbf{\Large preface:}
+
+\medskip
+{
+\normalsize
+Xuanxuan Qijing is a classical Chinese collection compiled by Yan Defu and Yan Tianzhang around year 1347. Its Japanese -- more well known -- name is Gengen Gokyo.
+
+There are many versions of the collection, but this should be one of the more complete versions, containing 347 problems of fairly difficult level. Unless you are at least top amateur player, some of the problems might show to be almost unsolvable for you. But if you keep trying, you will at least improve your reading immensely.
+
+Enjoy solving the problems and improving your reading.
+}
+
+\medskip
+\hfill \textit{tasuki}
+
+\hfill \textit{27.12.2006}
+
+\newpage % ---------------------------------------------------------------------
+
+\pagenumbering{arabic}
+
+\begin{multicols}{2}
+    \input{tmp/xxqj-problems.tex}
+\end{multicols}
+
+\end{document}

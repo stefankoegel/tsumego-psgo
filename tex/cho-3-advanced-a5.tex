@@ -1,0 +1,83 @@
+\documentclass[11pt]{book}
+
+\usepackage[a5paper,margin=1.5cm]{geometry}
+\usepackage{float}
+\usepackage{caption}
+
+\usepackage{multicol}
+\setlength{\columnsep}{0.5cm}
+
+\usepackage{psgo}
+\setlength{\goxunit}{0.29cm}
+\setlength{\goyunit}{0.29cm}
+
+\pagestyle{plain}
+
+% Format go problems
+\newcommand{\goproblem}[2]{%
+    \begin{figure}[H]
+        \caption*{\it #1}
+        \vspace{-1em}
+        \centering
+        #2
+        \vspace{-1em}
+    \end{figure}
+}
+
+\begin{document}
+
+\begin{titlepage}
+
+    \vspace*{0.2\textheight}
+
+    \begin{center}
+        \textit{\large Cho Chikun's}
+    \end{center}
+    \begin{center}
+        \textbf{\huge encyclopedia of life and death}
+    \end{center}
+    \begin{center}
+        {\large part third -- advanced problems}
+    \end{center}
+
+\end{titlepage}
+
+\newpage % ---------------------------------------------------------------------
+
+\pagenumbering{gobble}
+
+\noindent\textbf{\Large motto:}
+
+\medskip
+\textit{\normalsize ``It is a matter of life and death, a road either to safety or to ruin. Hence it is a subject of inquiry which can on no account be neglected.''}
+
+\medskip
+\hfill {\it Sun Tzu: The Art of War}
+\bigskip
+
+\noindent\textbf{\Large preface:}
+
+\medskip
+{
+\normalsize
+This is a collection of almost three thousand problems from Encyclopedia of life and death by Cho Chikun. The problems come without solution because of two particular reasons: first, I think we can learn more by actually solving the problem, trying all the possible variations; and second, the solutions are copyrighted. It is always {\bf black to move}, so I only show pictures without any distracting text around.
+
+In the third part, you can find about eight hundred problems for dan players, kyu players will have to work really hard to solve them. Dan player should spend on avarage a few minutes on one problem  -- there are some rather easy problems, but on the other hand some quite hard --, so he is likely to spend about three whole days (day and night) solving the problems.
+
+I wish you enjoyment and improving in the wonderful game of go, weiqi, baduk, or whatever you like to call it.
+}
+
+\medskip
+\hfill \textit{tasuki}
+
+\hfill \textit{27.11.2004}
+
+\newpage % ---------------------------------------------------------------------
+
+\pagenumbering{arabic}
+
+\begin{multicols}{2}
+    \input{tmp/cho-3-advanced-problems.tex}
+\end{multicols}
+
+\end{document}
