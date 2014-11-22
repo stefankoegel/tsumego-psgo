@@ -63,11 +63,11 @@ simpleToPSGO = positionalToPSGO . simpleToPositional
 intersection :: Parsec String u Intersection
 intersection = do
     string "\\"
-    inter <-
-            try (string "- @" >> return Black)
-        <|> try (string "- !" >> return White)
-        <|>     (string "0??" >> return Free)
-    oneOf "<>[](*+"
+    inter <- choice
+        [ try $ string "- @" >> return Black
+        , try $ string "- !" >> return White
+        , try $ string "0??" >> return Free ]
+    oneOf "<>,.[]()*+"
     return inter
 
 intersections :: Parsec String u [[Intersection]]
