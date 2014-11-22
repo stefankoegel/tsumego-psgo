@@ -1,17 +1,26 @@
 
 # set to a low value (~50) for testing
 # set to a high vlaue (>1000) for production
-MAXPROBLEMS = 50
+MAXPROBLEMS = 5000
 
 # find all templtes in the tex directory
 A5TEMPLATES = $(wildcard tex/*-a5.tex)
 A5PDF = $(patsubst tex/%-a5.tex, pdf/%-a5.pdf, $(A5TEMPLATES))
 
-.PHONY: all, clean, a5
+BOOKLETTEMPLATES = $(wildcard tex/*-booklet.tex)
+BOOKLETPDF = $(patsubst tex/%-booklet.tex, pdf/%-booklet.pdf, $(BOOKLETTEMPLATES))
 
-all: a5
+.PHONY: all, clean, a5, booklet
+
+all: a5, booklet
 
 a5: $(A5PDF)
+
+booklet: $(BOOKLETPDF)
+
+pdf/%-booklet.pdf: tex/%-booklet.tex pdf/%-a5.pdf
+	pdflatex -output-directory tmp $<
+	mv tmp/$*-booklet.pdf $@
 
 pdf/%-a5.pdf: tmp/%-a5.dvi
 	mkdir -p pdf
