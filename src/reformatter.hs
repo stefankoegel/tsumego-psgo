@@ -4,6 +4,7 @@ import System.Environment
 import Text.Parsec
 import Control.Arrow (second)
 import Text.Read (readMaybe)
+import Data.Char (isAscii)
 
 main = do
     progName <- getProgName
@@ -19,6 +20,7 @@ main = do
 reformat :: String -> String -> Int -> IO ()
 reformat input output number = do
     content <- readFile input
+    let asciiOnly = filter isAscii content
     case parse simpleBoards input content of
         Right boards -> writeFile output $ concatMap simpleToPSGO $ take number boards
         Left pError  -> print pError
@@ -73,7 +75,8 @@ intersections = many (manyTill intersection newline)
 
 beforeBoard :: Parsec String u ()
 beforeBoard = do
-    manyTill anyChar $ try $ string "\\vbox{\\vbox" >> manyTill anyChar newline
+    let keySequence = newline >> string "\\vbox{\\vbox" >> manyTill anyChar newline
+    manyTill anyChar $ try keySequence
     return ()
 
 boardName :: Parsec String u String
