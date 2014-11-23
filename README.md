@@ -37,7 +37,7 @@ You will also need to install
 * `psgo`
 
 from http://www.ctan.org/tex-archive/graphics/pstricks/contrib/psgo/.
-Simply copy the `psgo.sty` file into this repository
+Simply copy the `psgo.sty` file into this repository.
 
 ## Usage
 
